@@ -1,0 +1,19 @@
+// WPAD Example
+
+function FindProxyForURL(url, host) {
+
+    // proxy required FQDNs and their subdomains
+    var domainsToProxy = [
+        "ifconfig.co",
+        "whatsmyip.org"
+    ];
+
+    // Loop through our domains we want to proxy
+    for (var index = 0; index < domainsToProxy.length; ++index) {
+        const domain = domainsToProxy[index];
+        if (dnsDomainIs(host, "."+domain) || host == domain) {
+            return "PROXY webproxy.local:3128";
+        }
+    }
+    return "DIRECT";
+}
